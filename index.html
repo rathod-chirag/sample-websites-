@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gokul Photography | Amravati</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #F8F5F0;
+  --off-white: #FDFCFA;
+  --stone: #E6DDD4;
+  --taupe: #C4B9AE;
+  --warm-gray: #9A8E85;
+  --brown: #3D2B1F;
+  --accent: #A0724A;
+  --accent-light: #C89E76;
+  --text: #2E2118;
+  --muted: #7A6E67;
+  --nav-h: 74px;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--text); overflow-x: hidden; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--taupe); }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  height: var(--nav-h);
+  background: rgba(253,252,250,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--stone);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%;
+  transition: box-shadow 0.3s;
+}
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+.logo-wrap { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo-icon {
+  width: 38px; height: 38px; background: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.logo-icon svg { width: 20px; height: 20px; fill: #fff; }
+.logo-text { font-family: 'Cormorant Garamond', serif; font-size: 21px; font-weight: 600; color: var(--brown); letter-spacing: 0.02em; }
+.logo-text span { color: var(--accent); font-style: italic; }
+.nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover { color: var(--accent); }
+.nav-cta { background: var(--accent); color: #fff !important; padding: 9px 22px; font-size: 12px !important; letter-spacing: 0.12em !important; transition: background 0.2s !important; }
+.nav-cta:hover { background: var(--brown) !important; color: #fff !important; }
+.hamburger { display: none; cursor: pointer; padding: 6px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--brown); margin: 5px 0; transition: all 0.3s; }
+.mobile-menu { display: none; position: fixed; top: var(--nav-h); left: 0; right: 0; background: var(--off-white); border-bottom: 1px solid var(--stone); padding: 24px 6%; z-index: 998; flex-direction: column; gap: 20px; }
+.mobile-menu a { font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.mobile-menu.open { display: flex; }
+
+/* ── HERO ── */
+#home {
+  min-height: 100vh;
+  padding-top: var(--nav-h);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+}
+.hero-left {
+  background: var(--cream);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 80px 5% 80px 8%;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--off-white); border: 1px solid var(--stone);
+  padding: 7px 16px; margin-bottom: 36px;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+}
+.hero-badge::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.hero-h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(44px, 5.5vw, 72px);
+  line-height: 1.07; font-weight: 300; color: var(--brown);
+  margin-bottom: 28px;
+}
+.hero-h1 em { font-style: italic; color: var(--accent); }
+.hero-p { font-size: 15px; color: var(--muted); line-height: 1.85; max-width: 400px; margin-bottom: 44px; }
+.btn-row { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-dark { background: var(--brown); color: #fff; padding: 13px 30px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; font-family: 'DM Sans', sans-serif; display: inline-block; transition: background 0.2s; border: 1px solid var(--brown); }
+.btn-dark:hover { background: var(--accent); border-color: var(--accent); }
+.btn-ghost { background: transparent; color: var(--brown); padding: 13px 30px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; font-family: 'DM Sans', sans-serif; display: inline-block; border: 1px solid var(--taupe); transition: all 0.2s; }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.hero-stats { display: flex; gap: 44px; margin-top: 60px; padding-top: 44px; border-top: 1px solid var(--stone); }
+.stat-n { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 600; color: var(--brown); line-height: 1; margin-bottom: 6px; }
+.stat-l { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.hero-right {
+  background: var(--brown);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 3px;
+  width: 100%;
+  height: 100vh;
+}
+.hero-photo-grid .photo-box {
+  background: var(--brown);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.hero-photo-grid .photo-box img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  transition: transform 0.5s ease;
+}
+.hero-photo-grid .photo-box:hover img {
+  transform: scale(1.05);
+}
+.photo-box.large { grid-row: 1 / 3; }
+.hero-overlay-text {
+  position: absolute; bottom: 30px; left: 30px; right: 30px;
+  color: rgba(255,255,255,0.95);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-style: italic; font-weight: 300; line-height: 1.3;
+  z-index: 2;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+.hero-overlay-text span { display: block; font-family: 'DM Sans', sans-serif; font-style: normal; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-light); margin-top: 8px; }
+
+/* ── SECTION BASE ── */
+section { padding: 100px 8%; }
+.section-label { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+.section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: var(--brown); line-height: 1.15; }
+.section-title em { font-style: italic; color: var(--accent); }
+.section-sub { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 520px; margin-top: 16px; }
+.divider { width: 48px; height: 1px; background: var(--accent); margin: 28px 0; }
+
+/* ── ABOUT ── */
+#about { background: var(--cream); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 60px; }
+.about-img-wrap { position: relative; }
+.about-main-img {
+  width: 100%; aspect-ratio: 4/5;
+  background: var(--stone);
+  overflow: hidden;
+}
+.about-main-img img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.about-accent-box {
+  position: absolute; bottom: -24px; right: -24px;
+  width: 180px; height: 180px;
+  background: var(--accent);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px;
+  z-index: 2;
+}
+.about-accent-box .num { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; color: #fff; line-height: 1; }
+.about-accent-box .lbl { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.8); text-align: center; padding: 0 16px; }
+.about-content { padding-right: 20px; }
+.about-features { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.af-item { display: flex; align-items: flex-start; gap: 14px; }
+.af-icon { width: 40px; height: 40px; background: var(--off-white); border: 1px solid var(--stone); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.af-icon svg { width: 18px; height: 18px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+.af-title { font-size: 13px; font-weight: 500; color: var(--brown); margin-bottom: 4px; letter-spacing: 0.04em; }
+.af-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
+.rating-bar { display: flex; align-items: center; gap: 14px; margin-top: 36px; padding: 20px; background: var(--off-white); border: 1px solid var(--stone); }
+.stars { color: #E6A817; font-size: 18px; letter-spacing: 2px; }
+.rating-text { font-size: 13px; color: var(--muted); }
+.rating-text strong { color: var(--brown); font-size: 22px; font-family: 'Cormorant Garamond', serif; }
+
+/* ── SERVICES ── */
+#services { background: var(--off-white); }
+.services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+.service-card {
+  background: var(--cream);
+  padding: 40px 32px;
+  border: 1px solid var(--stone);
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.service-card::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.service-card:hover { background: var(--off-white); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.07); border-color: var(--taupe); }
+.service-card:hover::before { transform: scaleX(1); }
+.sc-num { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--stone); line-height: 1; margin-bottom: 20px; }
+.sc-icon { width: 48px; height: 48px; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+.sc-icon svg { width: 22px; height: 22px; stroke: #fff; fill: none; stroke-width: 1.5; }
+.sc-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--brown); margin-bottom: 12px; }
+.sc-desc { font-size: 13px; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+.sc-link { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: gap 0.2s; }
+.service-card:hover .sc-link { gap: 14px; }
+.sc-link::after { content: '→'; }
+
+/* ── GALLERY ── */
+#gallery { background: var(--brown); padding: 100px 4%; }
+#gallery .section-title { color: var(--cream); }
+#gallery .section-label { color: var(--accent-light); }
+.gallery-filter { display: flex; gap: 12px; flex-wrap: wrap; margin: 40px 0; }
+.filter-btn {
+  padding: 8px 20px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  background: transparent; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6);
+  cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+}
+.filter-btn.active, .filter-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.gallery-masonry {
+  columns: 4;
+  column-gap: 8px;
+}
+.gallery-item {
+  break-inside: avoid;
+  margin-bottom: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+.gallery-item img { display: block; width: 100%; height: auto; transition: transform 0.4s ease; }
+.gallery-item:hover img { transform: scale(1.04); }
+.gallery-item-overlay {
+  position: absolute; inset: 0;
+  background: rgba(61,43,31,0.7);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+  gap: 8px;
+}
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.gallery-item-overlay span.plus-icon {
+  width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.8);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 22px;
+}
+.gallery-item-overlay span.img-lbl {
+  color: #fff; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px;
+}
+
+/* ── PRICING ── */
+#pricing { background: var(--cream); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+.price-card {
+  background: var(--off-white); border: 1px solid var(--stone);
+  padding: 44px 36px; position: relative; transition: all 0.3s;
+}
+.price-card.featured {
+  background: var(--brown); border-color: var(--brown);
+  transform: translateY(-12px);
+}
+.price-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #fff;
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 18px;
+}
+.pc-name { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+.price-card.featured .pc-name { color: rgba(255,255,255,0.6); }
+.pc-price { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--brown); line-height: 1; }
+.price-card.featured .pc-price { color: #fff; }
+.pc-period { font-size: 13px; color: var(--muted); margin-top: 4px; margin-bottom: 28px; padding-bottom: 28px; border-bottom: 1px solid var(--stone); }
+.price-card.featured .pc-period { color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.15); }
+.pc-features { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+.pc-features li { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+.price-card.featured .pc-features li { color: rgba(255,255,255,0.75); }
+.pc-features li::before { content: '✓'; color: var(--accent); font-size: 14px; font-weight: 500; flex-shrink: 0; }
+.price-card.featured .pc-features li::before { color: var(--accent-light); }
+.pc-btn {
+  display: block; text-align: center; padding: 13px;
+  font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+  text-decoration: none; font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+  border: 1px solid var(--taupe); color: var(--brown);
+}
+.pc-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.price-card.featured .pc-btn { background: var(--accent); border-color: var(--accent); color: #fff; }
+.price-card.featured .pc-btn:hover { background: #fff; color: var(--brown); }
+
+/* ── TESTIMONIALS ── */
+#testimonials { background: var(--off-white); }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
+.testi-card {
+  background: var(--cream); border: 1px solid var(--stone);
+  padding: 36px; position: relative;
+}
+.testi-quote { font-size: 64px; font-family: 'Cormorant Garamond', serif; color: var(--stone); line-height: 0.8; margin-bottom: 16px; }
+.testi-text { font-size: 14px; color: var(--muted); line-height: 1.85; font-style: italic; margin-bottom: 28px; }
+.testi-author { display: flex; align-items: center; gap: 14px; }
+.testi-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 500; flex-shrink: 0;
+}
+.testi-name { font-size: 14px; font-weight: 500; color: var(--brown); }
+.testi-detail { font-size: 12px; color: var(--muted); }
+.testi-stars { color: #E6A817; font-size: 13px; letter-spacing: 1px; margin-bottom: 4px; }
+
+/* ── CONTACT ── */
+#contact { background: var(--cream); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 60px; }
+.contact-info-items { display: flex; flex-direction: column; gap: 28px; margin-top: 36px; }
+.ci-item { display: flex; align-items: flex-start; gap: 18px; }
+.ci-icon { width: 46px; height: 46px; background: var(--off-white); border: 1px solid var(--stone); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+.ci-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 1.5; }
+.ci-label { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.ci-value { font-size: 15px; color: var(--brown); font-weight: 400; }
+.contact-form { background: var(--off-white); border: 1px solid var(--stone); padding: 48px; }
+.form-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--brown); margin-bottom: 32px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: 12px 16px; background: var(--cream);
+  border: 1px solid var(--stone); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 14px;
+  outline: none; transition: border-color 0.2s; appearance: none;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+.form-group textarea { height: 110px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-submit { background: var(--accent); color: #fff; border: none; padding: 14px 32px; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-family: 'DM Sans', sans-serif; cursor: pointer; width: 100%; margin-top: 8px; transition: background 0.2s; }
+.form-submit:hover { background: var(--brown); }
+.map-container { margin-top: 36px; border: 1px solid var(--taupe); overflow: hidden; height: 260px; background: var(--stone); position: relative; }
+.map-container iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--brown); color: rgba(255,255,255,0.7);
+  padding: 70px 8% 32px;
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+.footer-brand .logo-text { color: var(--cream); font-size: 22px; }
+.footer-brand .logo-text span { color: var(--accent-light); }
+.footer-tagline { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8; margin-top: 16px; max-width: 240px; }
+.footer-social { display: flex; gap: 12px; margin-top: 24px; }
+.social-btn {
+  width: 36px; height: 36px; border: 1px solid rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.6); text-decoration: none; font-size: 14px; transition: all 0.2s;
+}
+.social-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.footer-col h4 { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.9); margin-bottom: 20px; }
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--accent-light); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.35); }
+.footer-rating { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.5); }
+.footer-stars { color: #E6A817; font-size: 14px; letter-spacing: 1px; }
+
+/* ── SCROLL TO TOP ── */
+.scroll-top {
+  position: fixed; bottom: 30px; right: 30px; width: 44px; height: 44px;
+  background: var(--accent); color: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+  opacity: 0; pointer-events: none; transition: all 0.3s; z-index: 500;
+}
+.scroll-top.visible { opacity: 1; pointer-events: all; }
+.scroll-top:hover { background: var(--brown); }
+
+/* ── WHATSAPP BTN ── */
+.whatsapp-float {
+  position: fixed; bottom: 84px; right: 30px; width: 48px; height: 48px;
+  background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  text-decoration: none; z-index: 500; box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+  transition: transform 0.2s;
+}
+.whatsapp-float:hover { transform: scale(1.1); }
+.whatsapp-float svg { width: 26px; height: 26px; fill: #fff; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1024px) {
+  #home { grid-template-columns: 1fr; }
+  .hero-right { height: 420px; }
+  .hero-photo-grid { grid-template-columns: repeat(4, 1fr); grid-template-rows: 1fr; height: 100%; }
+  .photo-box.large { grid-row: auto; }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .services-grid { grid-template-columns: 1fr 1fr; }
+  .gallery-masonry { columns: 3; }
+  .pricing-grid { grid-template-columns: 1fr; gap: 20px; }
+  .price-card.featured { transform: none; }
+  .testi-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 768px) {
+  section { padding: 70px 6%; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; flex-direction: column; }
+  .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .gallery-masonry { columns: 2; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .hero-stats { flex-wrap: wrap; gap: 24px; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 12px; }
+  .about-features { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#home" class="logo-wrap">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+    </div>
+    <span class="logo-text">Gokul <span>Photography</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMenu()">Home</a>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#pricing" onclick="toggleMenu()">Pricing</a>
+  <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="#contact" onclick="toggleMenu()">Book Now</a>
+</div>
+
+<section id="home">
+  <div class="hero-left">
+    <div class="hero-badge">Amravati's Trusted Photographer</div>
+    <h1 class="hero-h1">
+      Capturing <em>Life's</em><br>
+      Most Beautiful<br>
+      Moments
+    </h1>
+    <p class="hero-p">
+      From intimate weddings to joyful baby showers, we craft images that tell your story with artistry, warmth, and timeless elegance — based in Amravati, serving all of Maharashtra.
+    </p>
+    <div class="btn-row">
+      <a href="#contact" class="btn-dark">Book a Session</a>
+      <a href="#gallery" class="btn-ghost">View Gallery</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n">302+</div>
+        <div class="stat-l">Happy Clients</div>
+      </div>
+      <div>
+        <div class="stat-n">4.7★</div>
+        <div class="stat-l">Google Rating</div>
+      </div>
+      <div>
+        <div class="stat-n">10+</div>
+        <div class="stat-l">Years Experience</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-grid">
+      <div class="photo-box large">
+        <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?q=80&w=600&auto=format&fit=cover" alt="Indian Wedding Photography">
+        <div class="hero-overlay-text">
+          Wedding Photography
+          <span>Memories Forever</span>
+        </div>
+      </div>
+      <div class="photo-box">
+        <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?q=80&w=500&auto=format&fit=cover" alt="Baby Photoshoot">
+        <div class="hero-overlay-text" style="font-size:20px; bottom:15px; left:20px;">
+          Baby Shoot
+          <span>Pure Innocence</span>
+        </div>
+      </div>
+      <div class="photo-box">
+        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?q=80&w=500&auto=format&fit=cover" alt="Birthday Celebration Photography">
+        <div class="hero-overlay-text" style="font-size:20px; bottom:15px; left:20px;">
+          Birthday Events
+          <span>Joyful Slices</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">Our Story</div>
+  <h2 class="section-title">A Decade Behind the Lens in <em>Amravati</em></h2>
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <div class="about-main-img">
+        <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=600&auto=format&fit=cover" alt="Photographer at work">
+      </div>
+      <div class="about-accent-box">
+        <div class="num">10+</div>
+        <div class="lbl">Years of Crafting Memories</div>
+      </div>
+    </div>
+    <div class="about-content">
+      <p style="font-size:16px; color:var(--text); line-height:1.8; font-weight:500; margin-bottom:16px;">
+        Gokul Photography is a premium portrait and event photography studio located at Trade Mark Complex, Gadge Nagar. With over a decade of experience, we have built our reputation on delivering stunning, heartfelt images that families and couples treasure for generations.
+      </p>
+      <p style="font-size:15px; color:var(--muted); line-height:1.85;">
+        From advertisement shoots to intimate baby showers, our skilled team approaches every assignment with creativity, professionalism, and an eye for those fleeting, magical moments.
+      </p>
+      <div class="rating-bar">
+        <div class="stars">★★★★★</div>
+        <div class="rating-text"><strong>4.7</strong> — Rated by over 302 happy clients on Google</div>
+      </div>
+      <div class="about-features">
+        <div class="af-item">
+          <div class="af-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div>
+            <div class="af-title">Professional Team</div>
+            <div class="af-desc">Experienced photographers with an artistic eye</div>
+          </div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="af-title">Fast Delivery</div>
+            <div class="af-desc">Edited photos delivered on time, every time</div>
+          </div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <div>
+            <div class="af-title">Client-First Approach</div>
+            <div class="af-desc">Your vision, your comfort, your perfect photos</div>
+          </div>
+        </div>
+        <div class="af-item">
+          <div class="af-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div>
+            <div class="af-title">Top Equipment</div>
+            <div class="af-desc">High-end full-frame cameras & premium lighting</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="services-header">
+    <div>
+      <div class="section-label">What We Do</div>
+      <h2 class="section-title">Our Professional <em>Photography</em> Services</h2>
+    </div>
+    <p class="section-sub" style="margin-top:0;">Available for bookings across Amravati and surrounding regions in Maharashtra. Every session is fully customized.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="sc-num">01</div>
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <div class="sc-title">Wedding Photography</div>
+      <div class="sc-desc">End-to-end premium wedding coverage capturing sacred rituals, grand celebrations, and emotional candids beautifully.</div>
+      <a href="#contact" class="sc-link">Book Now</a>
+    </div>
+    <div class="service-card">
+      <div class="sc-num">02</div>
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M2 21h22M2 3h22M12 3v18M4 7.5h6M14 7.5h6M4 16.5h6M14 16.5h6"/></svg>
+      </div>
+      <div class="sc-title">Pre-Wedding Shoot</div>
+      <div class="sc-desc">Cinematic, romantic outdoor sessions across beautiful locations — your love story told beautifully before the big day.</div>
+      <a href="#contact" class="sc-link">Book Now</a>
+    </div>
+    <div class="service-card">
+      <div class="sc-num">03</div>
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      </div>
+      <div class="sc-title">Baby Shoot</div>
+      <div class="sc-desc">Adorable newborn and toddler sessions — soft lighting, playful props, and precious moments you'll cherish forever.</div>
+      <a href="#contact" class="sc-link">Book Now</a>
+    </div>
+    <div class="service-card">
+      <div class="sc-num">04</div>
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="sc-title">Baby Shower</div>
+      <div class="sc-desc">Elegant baby shower photography capturing decorations, games, and the joy of expecting — memories for a lifetime.</div>
+      <a href="#contact" class="sc-link">Book Now</a>
+    </div>
+    <div class="service-card">
+      <div class="sc-num">05</div>
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="sc-title">Birthday Photography</div>
+      <div class="sc-desc">From kids' birthdays to milestone celebrations — candid shots, group portraits, and every slice of joy captured.</div>
+      <a href="#contact" class="sc-link">Book Now</a>
+    </div>
+    <div class="service-card">
+      <div class="sc-num">06</div>
+      <div class="sc-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div class="sc-title">Advertisement Shoots</div>
+      <div class="sc-desc">Professional product and commercial photography for brands, businesses, and promotional campaigns across Maharashtra.</div>
+      <a href="#contact" class="sc-link">Book Now</a>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-label">Our Work</div>
+  <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+    <h2 class="section-title">The Portfolio <em>Gallery</em></h2>
+    <div class="gallery-filter">
+      <button class="filter-btn active" onclick="filterGallery(this, 'all')">All Work</button>
+      <button class="filter-btn" onclick="filterGallery(this, 'wedding')">Weddings</button>
+      <button class="filter-btn" onclick="filterGallery(this, 'baby')">Baby Shoots</button>
+      <button class="filter-btn" onclick="filterGallery(this, 'event')">Events</button>
+    </div>
+  </div>
+  
+  <div class="gallery-masonry">
+    <div class="gallery-item" data-cat="wedding">
+      <img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=500&auto=format&fit=cover" alt="Traditional Indian Bride">
+      <div class="gallery-item-overlay">
+        <span class="plus-icon">+</span>
+        <span class="img-lbl">Wedding Portrait</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="baby">
+      <img src="https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?q=80&w=500&auto=format&fit=cover" alt="Smiling Baby Close up">
+      <div class="gallery-item-overlay">
+        <span class="plus-icon">+</span>
+        <span class="img-lbl">Baby Session</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="wedding">
+      <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=500&auto=format&fit=cover" alt="Indian Couple Rituals">
+      <div class="gallery-item-overlay">
+        <span class="plus-icon">+</span>
+        <span class="img-lbl">Couples Shoot</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="event">
+      <img src="https://images.unsplash.com/photo-1464349172961-10442b37710c?q=80&w=500&auto=format&fit=cover" alt="Birthday Cake and Decor">
+      <div class="gallery-item-overlay">
+        <span class="plus-icon">+</span>
+        <span class="img-lbl">Birthday Event</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="wedding">
+      <img src="https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=500&auto=format&fit=cover" alt="Wedding Ring Exchange">
+      <div class="gallery-item-overlay">
+        <span class="plus-icon">+</span>
+        <span class="img-lbl">Ceremony Closeup</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="baby">
+      <img src="https://images.unsplash.com/photo-1519689916265-a34020751683?q=80&w=500&auto=format&fit=cover" alt="Newborn sleeping props">
+      <div class="gallery-item-overlay">
+        <span class="plus-icon">+</span>
+        <span class="img-lbl">Newborn Session</span>
+      </div>
+    </div>
+    <div class="gallery-item" data-cat="event">
+      <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=500&auto=format&fit=cover" alt="Celebration event decor">
+      <div class="gallery-item-overlay">
+        <span class="plus-icon">+</span>
+        <span class="img-lbl">Milestone Event</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing">
+  <div style="text-align:center; margin-bottom:0;">
+    <div class="section-label" style="text-align:center;">Transparent Pricing</div>
+    <h2 class="section-title" style="text-align:center;">Simple, <em>Honest</em> Packages</h2>
+    <p class="section-sub" style="margin: 16px auto 0; text-align:center;">All packages include professionally edited digital photos. Custom quotes available for larger events.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="pc-name">Essential</div>
+      <div class="pc-price">₹5,000</div>
+      <div class="pc-period">Starting price · 2-hour session</div>
+      <ul class="pc-features">
+        <li>2-hour photoshoot</li>
+        <li>50+ edited digital photos</li>
+        <li>1 location</li>
+        <li>Online gallery delivery</li>
+        <li>Baby Shoot / Portraits</li>
+      </ul>
+      <a href="#contact" class="pc-btn">Book This Package</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-badge">Most Popular</div>
+      <div class="pc-name">Premium</div>
+      <div class="pc-price">₹15,000</div>
+      <div class="pc-period">Starting price · Full-day coverage</div>
+      <ul class="pc-features">
+        <li>Full-day coverage (8 hrs)</li>
+        <li>300+ edited digital photos</li>
+        <li>2 photographers</li>
+        <li>Cinematic video highlights</li>
+        <li>Wedding / Pre-wedding</li>
+        <li>Premium photo album</li>
+      </ul>
+      <a href="#contact" class="pc-btn">Book This Package</a>
+    </div>
+    <div class="price-card">
+      <div class="pc-name">Event</div>
+      <div class="pc-price">₹8,000</div>
+      <div class="pc-period">Starting price · 4-hour session</div>
+      <ul class="pc-features">
+        <li>4-hour photoshoot</li>
+        <li>150+ edited digital photos</li>
+        <li>Candid + traditional mix</li>
+        <li>Online gallery delivery</li>
+        <li>Birthday / Baby Shower</li>
+      </ul>
+      <a href="#contact" class="pc-btn">Book This Package</a>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials">
+  <div style="text-align:center; margin-bottom:0;">
+    <div class="section-label" style="text-align:center;">Testimonials</div>
+    <h2 class="section-title" style="text-align:center;">What Our <em>Clients</em> Say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Gokul and his team made our wedding memories absolute perfection. Every emotional moment was captured so naturally. The album design is top-class. Extremely professional team in Amravati!</div>
+      <div class="testi-author">
+        <div class="testi-avatar">R</div>
+        <div>
+          <div class="testi-name">Rahul S.</div>
+          <div class="testi-detail">Wedding Client · Amravati</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">We booked them for our daughter's first birthday and newborn baby shoot. They were incredibly patient with the baby, and the photographs came out warm, bright, and so cheerful!</div>
+      <div class="testi-author">
+        <div class="testi-avatar">S</div>
+        <div>
+          <div class="testi-name">Sneha M.</div>
+          <div class="testi-detail">Baby Shoot Client · Amravati</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-quote">"</div>
+      <div class="testi-stars">★★★★★</div>
+      <div class="testi-text">Highly professional and very creative. Our advertisement shoot turned out beyond expectations. The photos were sharp, vibrant, and perfect for our brand. 100% recommend!</div>
+      <div class="testi-author">
+        <div class="testi-avatar">VK</div>
+        <div>
+          <div class="testi-name">Vikas K.</div>
+          <div class="testi-detail">Commercial Client · Amravati</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Get In Touch</div>
+  <h2 class="section-title">Let's Create <em>Something</em> Beautiful</h2>
+  <div class="contact-grid">
+    <div>
+      <p class="section-sub">Ready to book a session or have questions? We'd love to hear from you. Fill in the form or reach out directly.</p>
+      <div class="contact-info-items">
+        <div class="ci-item">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Address</div>
+            <div class="ci-value">Trade Mark Complex, Gadge Nagar,<br>Amravati, Maharashtra 444603</div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l1.95-1.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Phone Number</div>
+            <div class="ci-value">+91 72133 04942</div>
+          </div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Email Address</div>
+            <div class="ci-value">info@gokulphotography.com</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="map-container">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3727.1804294086603!2d77.7656608759616!3d20.905072091355495!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd6a4bf7d6110f5%3A0xc07c0b0213b35583!2sGadge%20Nagar%2C%20Amravati%2C%20Maharashtra%20444603!5e0!3m2!1sen!2sin!4v1716223400000!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+    </div>
+    
+    <div class="contact-form">
+      <div class="form-title">Book a Session</div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="+91 XXXXX XXXXX">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Service Required</label>
+        <select>
+          <option value="">Select a service...</option>
+          <option>Wedding Photography</option>
+          <option>Pre-Wedding Shoot</option>
+          <option>Baby Shoot</option>
+          <option>Baby Shower</option>
+          <option>Birthday Photography</option>
+          <option>Advertisement Shoot</option>
+          <option>Other / Custom</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Event Date</label>
+          <input type="date">
+        </div>
+        <div class="form-group">
+          <label>Budget Range</label>
+          <select>
+            <option value="">Select range...</option>
+            <option>Under ₹5,000</option>
+            <option>₹5,000 – ₹10,000</option>
+            <option>₹10,000 – ₹20,000</option>
+            <option>₹20,000+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell us about your event, special requirements, or any questions..."></textarea>
+      </div>
+      <button class="form-submit" onclick="handleSubmit()">Send Enquiry →</button>
+      <p style="font-size:12px; color:var(--muted); margin-top:14px; text-align:center;">We typically respond within a few hours.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-text">Gokul <span>Photography</span></div>
+      <p class="footer-tagline">Capturing life's most cherished moments with artistry and warmth — based in Amravati, Maharashtra.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="#" class="social-btn" title="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Portfolio</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Weddings</a></li>
+        <li><a href="#services">Pre-Weddings</a></li>
+        <li><a href="#services">Baby Shoots</a></li>
+        <li><a href="#services">Events</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Studio Hours</h4>
+      <ul>
+        <li><a href="#">Mon - Sat: 10 AM - 9 PM</a></li>
+        <li><a href="#">Sunday: By Appointment</a></li>
+        <li><a href="#" style="color:var(--accent-light); font-weight:500;">Open till 9:30 PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Gokul Photography. All rights reserved. · Amravati, Maharashtra</div>
+    <div class="footer-rating">
+      <span class="footer-stars">★★★★★</span>
+      <span>4.7 on Google · 302 Reviews</span>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<a href="https://wa.me/917213304942" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.746.953 3.71 1.455 5.703 1.456h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.classList.toggle('open');
+}
+window.addEventListener('scroll', () => {
+  const st = document.getElementById('scrollTop');
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 300) { st.classList.add('visible'); } else { st.classList.remove('visible'); }
+  if (window.scrollY > 50) { nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+});
+function filterGallery(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    if (cat === 'all' || item.dataset.cat === cat) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+function handleSubmit() {
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = '✓ Enquiry Sent! We will contact you soon.';
+  btn.style.background = '#3D2B1F';
+  btn.disabled = true;
+}
+</script>
+
+</body>
+</html>
